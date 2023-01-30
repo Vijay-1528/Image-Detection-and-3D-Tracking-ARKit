@@ -8,6 +8,7 @@
 import UIKit
 import ARKit
 import RealityKit
+import UIKit.UIGestureRecognizerSubclass
 
 class ViewController: UIViewController {
 
@@ -38,6 +39,10 @@ class ViewController: UIViewController {
     /// A serial queue used to coordinate adding or removing nodes from the scene.
     let updateQueue = DispatchQueue(label: "com.example.apple-samplecode.arkitexample.serialSceneKitQueue")
     
+    var nodeName = ""
+    
+    let nodeArray: [String] = ["Chappathi", "IdlySambar", "naanChanna"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -46,7 +51,7 @@ class ViewController: UIViewController {
         sceneView.showsStatistics = true
         
         let configuration = ARWorldTrackingConfiguration()
-        let referenceImg = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)
+        let referenceImg = ARReferenceImage.referenceImages(inGroupNamed: "Menu Resources", bundle: nil)
         configuration.detectionImages = referenceImg
         configuration.planeDetection = [.horizontal, .vertical]
         if #available(iOS 12.0, *) {
@@ -54,7 +59,10 @@ class ViewController: UIViewController {
         }
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedAction(_:)))
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedAction(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didPan(_:)))
+        tapGesture.numberOfTapsRequired = 1
+        tapGesture.delegate = self
         self.sceneView.addGestureRecognizer(tapGesture)
 
 //        statusViewController.scheduleMessage("FIND A SURFACE TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .planeEstimation)
@@ -263,144 +271,190 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        
-        let _ = virtualObjectLoader.loadedObjects.contains { object in
-            return sceneView.isNode(object, insideFrustumOf: sceneView.pointOfView!)
-        }
-        
-        DispatchQueue.main.async {
-//            self.updateFocusSquare(isObjectVisible: isAnyObjectInView)
-            
-            // If the object selection menu is open, update availability of items
-            if self.objectsViewController?.viewIfLoaded?.window != nil {
-                self.objectsViewController?.updateObjectAvailability()
-            }
-        }
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard let imageAnchor = anchor as? ARImageAnchor else { return }
-        
-        if imageAnchor.referenceImage.name == "IMG_0509" {
-            node.simdTransform = imageAnchor.transform
-        }
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-        guard let newAnchor = anchor as? ARImageAnchor else {return node}
-        debugPrint("newAnchor \(newAnchor)")
-        debugPrint("newAnchor width \(newAnchor.referenceImage.physicalSize.width) and height \(newAnchor.referenceImage.physicalSize.height)")
-        let planeAnchor = SCNPlane(width: newAnchor.referenceImage.physicalSize.width, height: newAnchor.referenceImage.physicalSize.width)
-        node.position = SCNVector3(anchor.transform.columns.3.x-0.5, anchor.transform.columns.3.y, 0.0)
-//        let planeAnchor = SCNPlane(width: 0.5, height: 0.5)
-        
-//        guard let container = self.sceneView.scene.rootNode.childNode(withName: "candle", recursively: false) else { return node }
-        planeAnchor.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 1.0)
-        
-        let planeNode = SCNNode(geometry: planeAnchor)
-        planeNode.eulerAngles.x = -.pi / 2
-        
-//        guard let screen = SCNScene(named: "Models.scnassets/sticky note/sticky note.scn") else { return node }
-        guard let screen = SCNScene(named: "Models.scnassets/cup/cup.scn") else { return node }
-        
-//        guard let screens = SCNScene(named: "Models.scnassets/cup/cup.scn") else { return node }
-//        guard let screen = SCNScene(named: "FRENCH_FRIES.obj") else { return node }
-//        let reference = VirtualObject()
-//        reference.addChildNode(screens.rootNode.childNodes.first!)
-        let animeNode = screen.rootNode.childNodes.first!
-        animeNode.name = "cup"
-        animeNode.position = SCNVector3Zero
-        animeNode.position.x = animeNode.position.x + Float(newAnchor.referenceImage.physicalSize.width-(newAnchor.referenceImage.physicalSize.width/2))
-        animeNode.position.z = 0.15
-        
-        
-        
-        guard let screen2 = SCNScene(named: "Models.scnassets/cup/cup.scn") else { return node }
-        
-        let animeNode2 = screen2.rootNode.childNodes.first!
-        animeNode2.name = "cup2"
-        animeNode2.position = SCNVector3Zero
-        animeNode2.position.x = animeNode2.position.x + Float(newAnchor.referenceImage.physicalSize.width-(newAnchor.referenceImage.physicalSize.width/2))
-        animeNode2.position.y = animeNode.position.y+0.08
-        animeNode2.position.z = 0.15
-        
-        
-        
-//        self.sceneView.allowsCameraControl = true
-//        self.sceneView.cameraControlConfiguration.allowsTranslation = false
-//        DispatchQueue.main.async {
-////            self.virtualObjectInteraction.selectedObject = reference
-//            self.updateCurrentScreen()
-//            self.virtualObjectSelectionViewController(didSelectObject: reference)
+//    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+//
+//        let _ = virtualObjectLoader.loadedObjects.contains { object in
+//            return sceneView.isNode(object, insideFrustumOf: sceneView.pointOfView!)
 //        }
-        planeNode.addChildNode(animeNode)
-        planeNode.addChildNode(animeNode2)
-        
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now()+1.0) {
-//            let cellIsEnabled = self.enabledVirtualObjectRows.contains(2)
-//            guard cellIsEnabled else { return }
-//            self.updateCurrentScreen()
-//            let object = self.virtualObjects[2]
-//            object.anchor = anchor
-//            self.virtualObjectSelectionViewController(didSelectObject: object)
-//            if let anchor = object.anchor {
-//                self.session.add(anchor: anchor)
+//
+//        DispatchQueue.main.async {
+////            self.updateFocusSquare(isObjectVisible: isAnyObjectInView)
+//
+//            // If the object selection menu is open, update availability of items
+//            if self.objectsViewController?.viewIfLoaded?.window != nil {
+//                self.objectsViewController?.updateObjectAvailability()
 //            }
 //        }
-        
-        node.addChildNode(planeNode)
-        
+//    }
+    
+//    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+//        guard let imageAnchor = anchor as? ARImageAnchor else { return }
+//
+//        if imageAnchor.referenceImage.name == "IMG_0509" {
+//            node.simdTransform = imageAnchor.transform
+//        }
+//    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let parentNode = SCNNode()
-        var childNode = [SCNNode(), SCNNode()]
-        
-        let firstNode = SCNPlane(width: newAnchor.referenceImage.physicalSize.width, height: newAnchor.referenceImage.physicalSize.width)
-        firstNode.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 0.5)
-        let firstPlane = SCNNode(geometry: firstNode)
-        firstPlane.position.x = firstPlane.position.x+0.08
-        firstPlane.eulerAngles.x = -.pi / 2
-        firstPlane.name = "cup"
-        
-        guard let separateFirstScreen = SCNScene(named: "Models.scnassets/cup/cup.scn") else { return node }
-        let firstAnimeNode = separateFirstScreen.rootNode.childNodes.first!
-        firstAnimeNode.name = "cup"
-        firstAnimeNode.position = SCNVector3Zero
-//        let physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-//        firstAnimeNode.physicsBody = physicsBody
-//        firstAnimeNode.position.x = firstAnimeNode.position.x + Float(newAnchor.referenceImage.physicalSize.width-(newAnchor.referenceImage.physicalSize.width/2))
-        firstAnimeNode.position.z = 0.15
-        firstPlane.addChildNode(firstAnimeNode)
-        
-        let secondNode = SCNPlane(width: newAnchor.referenceImage.physicalSize.width, height: newAnchor.referenceImage.physicalSize.width)
-        secondNode.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 0.5)
-        let secondPlane = SCNNode(geometry: secondNode)
-        secondPlane.position.x = secondPlane.position.x+0.08
-//        secondPlane.position.y = secondPlane.position.y-0.05
-        secondPlane.position.z = secondPlane.position.z+0.08
-        secondPlane.eulerAngles.x = -.pi / 2
-        secondPlane.name = "cup2"
-        
-//        guard let separateSecondScreen = SCNScene(named: "Models.scnassets/cup/cup.scn") else { return node }
-        guard let separateSecondScreen = SCNScene(named: "ice cream.obj") else { return node }
-        let secondAnimeNode2 = separateSecondScreen.rootNode.childNodes.first!
-        secondAnimeNode2.name = "cup2"
-        secondAnimeNode2.position = SCNVector3Zero
-//        secondAnimeNode2.position.x = secondAnimeNode2.position.x + Float(newAnchor.referenceImage.physicalSize.width-(newAnchor.referenceImage.physicalSize.width/2))
-//        secondAnimeNode2.position.y = firstAnimeNode.position.y+0.08
-        secondAnimeNode2.position.z = 0.15
-        secondPlane.addChildNode(secondAnimeNode2)
-        
-        
-        
-        childNode.append(firstPlane)
-        childNode.append(secondPlane)
-        for item in childNode {
-            parentNode.addChildNode(item)
+        let node = SCNNode()
+        renderer.scene?.isPaused = false
+        if let imageAnchor = anchor as? ARImageAnchor, self.nodeArray.contains(imageAnchor.name ?? "") {
+            let plane = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height)
+            
+            plane.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 0.0)
+            
+            let planeNode = SCNNode(geometry: plane)
+            planeNode.eulerAngles.x = -.pi / 2
+            planeNode.name = "fine"
+            
+            node.position.x += 0.08
+            
+            var cupScene = SCNScene(named: "Models.scnassets/cup/cup.scn")!
+            if imageAnchor.name ?? "" == "Chappathi" {
+                cupScene = SCNScene(named: "Models.scnassets/candle/candle.scn")!
+            } else if imageAnchor.name ?? "" == "naanChanna" {
+                cupScene = SCNScene(named: "Models.scnassets/sticky note/sticky note.scn")!
+            }
+            let cupNode = cupScene.rootNode.childNodes.first!
+            cupNode.position = SCNVector3Zero
+            cupNode.position.z = 0.15
+            
+            cupNode.name = "not"
+            debugPrint("node name == \(imageAnchor.name ?? "")")
+            
+            planeNode.addChildNode(cupNode)
+            
+            
+            node.addChildNode(planeNode)
+            parentNode.addChildNode(node)
+            
+            
         }
+        
         return parentNode
     }
+    
+//    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+//        let node = SCNNode()
+//        guard let newAnchor = anchor as? ARImageAnchor else {return node}
+//        debugPrint("newAnchor \(newAnchor)")
+//        debugPrint("newAnchor width \(newAnchor.referenceImage.physicalSize.width) and height \(newAnchor.referenceImage.physicalSize.height)")
+//        let planeAnchor = SCNPlane(width: newAnchor.referenceImage.physicalSize.width, height: newAnchor.referenceImage.physicalSize.width)
+//        node.position = SCNVector3(anchor.transform.columns.3.x-0.5, anchor.transform.columns.3.y, 0.0)
+////        let planeAnchor = SCNPlane(width: 0.5, height: 0.5)
+//
+////        guard let container = self.sceneView.scene.rootNode.childNode(withName: "candle", recursively: false) else { return node }
+//        planeAnchor.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 1.0)
+//
+//        let planeNode = SCNNode(geometry: planeAnchor)
+//        planeNode.eulerAngles.x = -.pi / 2
+//
+////        guard let screen = SCNScene(named: "Models.scnassets/sticky note/sticky note.scn") else { return node }
+//        guard let screen = SCNScene(named: "Models.scnassets/cup/cup.scn") else { return node }
+//
+////        guard let screens = SCNScene(named: "Models.scnassets/cup/cup.scn") else { return node }
+////        guard let screen = SCNScene(named: "FRENCH_FRIES.obj") else { return node }
+////        let reference = VirtualObject()
+////        reference.addChildNode(screens.rootNode.childNodes.first!)
+//        let animeNode = screen.rootNode.childNodes.first!
+//        animeNode.name = "cup"
+//        animeNode.position = SCNVector3Zero
+//        animeNode.position.x = animeNode.position.x + Float(newAnchor.referenceImage.physicalSize.width-(newAnchor.referenceImage.physicalSize.width/2))
+//        animeNode.position.z = 0.15
+//
+//
+//
+//        guard let screen2 = SCNScene(named: "Models.scnassets/cup/cup.scn") else { return node }
+//
+//        let animeNode2 = screen2.rootNode.childNodes.first!
+//        animeNode2.name = "cup2"
+//        animeNode2.position = SCNVector3Zero
+//        animeNode2.position.x = animeNode2.position.x + Float(newAnchor.referenceImage.physicalSize.width-(newAnchor.referenceImage.physicalSize.width/2))
+//        animeNode2.position.y = animeNode.position.y+0.08
+//        animeNode2.position.z = 0.15
+//
+//
+//
+////        self.sceneView.allowsCameraControl = true
+////        self.sceneView.cameraControlConfiguration.allowsTranslation = false
+////        DispatchQueue.main.async {
+//////            self.virtualObjectInteraction.selectedObject = reference
+////            self.updateCurrentScreen()
+////            self.virtualObjectSelectionViewController(didSelectObject: reference)
+////        }
+//        planeNode.addChildNode(animeNode)
+//        planeNode.addChildNode(animeNode2)
+//
+//
+////        DispatchQueue.main.asyncAfter(deadline: .now()+1.0) {
+////            let cellIsEnabled = self.enabledVirtualObjectRows.contains(2)
+////            guard cellIsEnabled else { return }
+////            self.updateCurrentScreen()
+////            let object = self.virtualObjects[2]
+////            object.anchor = anchor
+////            self.virtualObjectSelectionViewController(didSelectObject: object)
+////            if let anchor = object.anchor {
+////                self.session.add(anchor: anchor)
+////            }
+////        }
+//
+//        node.addChildNode(planeNode)
+//
+//        let parentNode = SCNNode()
+//        var childNode = [SCNNode(), SCNNode()]
+//
+//        let firstNode = SCNPlane(width: newAnchor.referenceImage.physicalSize.width, height: newAnchor.referenceImage.physicalSize.width)
+//        firstNode.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 0.5)
+//        let firstPlane = SCNNode(geometry: firstNode)
+//        firstPlane.position.x = firstPlane.position.x+0.08
+//        firstPlane.eulerAngles.x = -.pi / 2
+//        firstPlane.name = "cup"
+//
+//        guard let separateFirstScreen = SCNScene(named: "Models.scnassets/cup/cup.scn") else { return node }
+//        let firstAnimeNode = separateFirstScreen.rootNode.childNodes.first!
+//        firstAnimeNode.name = "cup"
+//        firstAnimeNode.position = SCNVector3Zero
+////        let physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+////        firstAnimeNode.physicsBody = physicsBody
+////        firstAnimeNode.position.x = firstAnimeNode.position.x + Float(newAnchor.referenceImage.physicalSize.width-(newAnchor.referenceImage.physicalSize.width/2))
+//        firstAnimeNode.position.z = 0.15
+//        let additionalFirstAnimeNode = SCNNode()
+//        additionalFirstAnimeNode.name = "cup"
+//        additionalFirstAnimeNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+//        additionalFirstAnimeNode.position = SCNVector3Zero
+//        additionalFirstAnimeNode.position.z = 0.15
+////        firstPlane.addChildNode(additionalFirstAnimeNode)
+//        firstPlane.addChildNode(firstAnimeNode)
+//
+//        let secondNode = SCNPlane(width: newAnchor.referenceImage.physicalSize.width, height: newAnchor.referenceImage.physicalSize.width)
+//        secondNode.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 0.5)
+//        let secondPlane = SCNNode(geometry: secondNode)
+//        secondPlane.position.x = secondPlane.position.x+0.08
+////        secondPlane.position.y = secondPlane.position.y-0.05
+//        secondPlane.position.z = secondPlane.position.z+0.08
+//        secondPlane.eulerAngles.x = -.pi / 2
+//        secondPlane.name = "cup2"
+//
+////        guard let separateSecondScreen = SCNScene(named: "Models.scnassets/cup/cup.scn") else { return node }
+//        guard let separateSecondScreen = SCNScene(named: "ice cream.obj") else { return node }
+//        let secondAnimeNode2 = separateSecondScreen.rootNode.childNodes.first!
+//        secondAnimeNode2.name = "cup2"
+//        secondAnimeNode2.position = SCNVector3Zero
+////        secondAnimeNode2.position.x = secondAnimeNode2.position.x + Float(newAnchor.referenceImage.physicalSize.width-(newAnchor.referenceImage.physicalSize.width/2))
+////        secondAnimeNode2.position.y = firstAnimeNode.position.y+0.08
+//        secondAnimeNode2.position.z = 0.15
+////        secondPlane.addChildNode(secondAnimeNode2)
+//
+//
+//
+//        childNode.append(firstPlane)
+//        childNode.append(secondPlane)
+//        for item in childNode {
+//            parentNode.addChildNode(item)
+//        }
+//        return parentNode
+//    }
     
 //    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
 //        guard let imgAnchor = anchor as? ARImageAnchor else {return}
@@ -460,3 +514,78 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
 //    }
 }
 
+extension ViewController: UIGestureRecognizerDelegate {
+    // MARK: - Gesture Actions
+    
+    @objc
+    func didPan(_ gesture: ThresholdPanGesture) {
+        switch gesture.state {
+        case .began:
+            // Check for an object at the touch location.
+//            if let object = objectInteracting(with: gesture, in: sceneView) {
+//                trackedObject = object
+//            }
+            debugPrint("begin is working")
+            break
+            
+        case .changed where gesture.isThresholdExceeded:
+//            guard let object = trackedObject else { return }
+//            // Move an object if the displacment threshold has been met.
+//            translate(object, basedOn: updatedTrackingPosition(for: object, from: gesture))
+//
+//            gesture.setTranslation(.zero, in: sceneView)
+            debugPrint("changed is working")
+            break
+            
+        case .changed:
+            // Ignore the pan gesture until the displacment threshold is exceeded.
+            break
+            
+        case .ended:
+            // Update the object's position when the user stops panning.
+            guard let tapSceneView = gesture.view as? SCNView else {return}
+            let touchLocation = gesture.location(in: tapSceneView)
+            let hitResult = tapSceneView.hitTest(touchLocation)
+            if !(hitResult.isEmpty) {
+                for nodes in hitResult {
+                    if nodes.node.name == "cup" {
+                        self.nodeName = nodes.node.name ?? ""
+                        let node = hitResult[0].node
+                        debugPrint("They have touch the 3D model node")
+                        DispatchQueue.main.async {
+                            let alert = UIAlertController(title: "Alert", message: "You have touched the cup 3D model node", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "Ok", style: .default)
+                            alert.addAction(okAction)
+                            self.present(alert, animated: true)
+                        }
+                    } else if nodes.node.name == "candle_holder" {
+                        self.nodeName = nodes.node.name ?? ""
+                        let node = hitResult[0].node
+                        debugPrint("They have touch the candle 3D model node")
+                        DispatchQueue.main.async {
+                            let alert = UIAlertController(title: "Alert", message: "You have touched the candle 3D model node", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "Ok", style: .default)
+                            alert.addAction(okAction)
+                            self.present(alert, animated: true)
+                        }
+                    } else if nodes.node.name == "note" {
+                        self.nodeName = nodes.node.name ?? ""
+                        let node = hitResult[0].node
+                        debugPrint("They have touch the note 3D model node")
+                        DispatchQueue.main.async {
+                            let alert = UIAlertController(title: "Alert", message: "You have touched the note 3D model node", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "Ok", style: .default)
+                            alert.addAction(okAction)
+                            self.present(alert, animated: true)
+                        }
+                    }
+                }
+            }
+            break
+        default:
+            // Reset the current position tracking.
+            debugPrint("default is working")
+            break
+        }
+    }
+}
