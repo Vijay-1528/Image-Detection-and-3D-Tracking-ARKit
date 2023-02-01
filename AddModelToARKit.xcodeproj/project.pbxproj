@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68336DB029891EE600EE8840 /* StarRatingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68336DAC29891EE600EE8840 /* StarRatingStackView.swift */; };
+		68336DB129891EE600EE8840 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68336DAD29891EE600EE8840 /* StarRatingView.swift */; };
+		68336DB229891EE600EE8840 /* starRatingViewInIntefaceBuilder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68336DAE29891EE600EE8840 /* starRatingViewInIntefaceBuilder.png */; };
+		68336DB329891EE600EE8840 /* StarRatingStackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68336DAF29891EE600EE8840 /* StarRatingStackView.xib */; };
+		68336DB5298944CB00EE8840 /* RatingFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 68336DB4298944CB00EE8840 /* RatingFile.json */; };
+		68336DB7298946ED00EE8840 /* RatingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68336DB6298946EC00EE8840 /* RatingModel.swift */; };
 		6870BD51297A7B4F009482B4 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 6870BD50297A7B4F009482B4 /* art.scnassets */; };
 		6870BD55297AAC57009482B4 /* FRENCH_FRIES.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6870BD54297AAC57009482B4 /* FRENCH_FRIES.obj */; };
 		68CF86172984309300E67C43 /* Cupcake.obj in Resources */ = {isa = PBXBuildFile; fileRef = 68CF86152984309300E67C43 /* Cupcake.obj */; };
@@ -28,6 +34,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68336DAC29891EE600EE8840 /* StarRatingStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarRatingStackView.swift; sourceTree = "<group>"; };
+		68336DAD29891EE600EE8840 /* StarRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		68336DAE29891EE600EE8840 /* starRatingViewInIntefaceBuilder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starRatingViewInIntefaceBuilder.png; sourceTree = "<group>"; };
+		68336DAF29891EE600EE8840 /* StarRatingStackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StarRatingStackView.xib; sourceTree = "<group>"; };
+		68336DB4298944CB00EE8840 /* RatingFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RatingFile.json; sourceTree = "<group>"; };
+		68336DB6298946EC00EE8840 /* RatingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingModel.swift; sourceTree = "<group>"; };
 		6870BD50297A7B4F009482B4 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		6870BD54297AAC57009482B4 /* FRENCH_FRIES.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FRENCH_FRIES.obj; sourceTree = "<group>"; };
 		68CF86152984309300E67C43 /* Cupcake.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cupcake.obj; sourceTree = "<group>"; };
@@ -61,6 +73,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68336DAB29891EB900EE8840 /* StarRatingView */ = {
+			isa = PBXGroup;
+			children = (
+				68336DAC29891EE600EE8840 /* StarRatingStackView.swift */,
+				68336DAF29891EE600EE8840 /* StarRatingStackView.xib */,
+				68336DAD29891EE600EE8840 /* StarRatingView.swift */,
+				68336DAE29891EE600EE8840 /* starRatingViewInIntefaceBuilder.png */,
+			);
+			path = StarRatingView;
+			sourceTree = "<group>";
+		};
 		68F10D532976A04300767125 = {
 			isa = PBXGroup;
 			children = (
@@ -110,10 +133,13 @@
 		68F10D792976A24D00767125 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				68336DAB29891EB900EE8840 /* StarRatingView */,
 				68F10D852976C43A00767125 /* ThresholdPanGesture.swift */,
 				68F10D832976B7DD00767125 /* VirtualObjectInteraction.swift */,
 				68F10D7A2976A26100767125 /* VirtualObjectARView.swift */,
 				68F10D812976AD2D00767125 /* VirtualObjectSelection.swift */,
+				68336DB4298944CB00EE8840 /* RatingFile.json */,
+				68336DB6298946EC00EE8840 /* RatingModel.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -186,12 +212,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				68F10D6F2976A04400767125 /* LaunchScreen.storyboard in Resources */,
+				68336DB5298944CB00EE8840 /* RatingFile.json in Resources */,
 				68F10D782976A1C800767125 /* Models.scnassets in Resources */,
 				6870BD51297A7B4F009482B4 /* art.scnassets in Resources */,
 				68F10D6C2976A04400767125 /* Assets.xcassets in Resources */,
 				6870BD55297AAC57009482B4 /* FRENCH_FRIES.obj in Resources */,
 				68CF86172984309300E67C43 /* Cupcake.obj in Resources */,
 				68F10D672976A04300767125 /* Main.storyboard in Resources */,
+				68336DB229891EE600EE8840 /* starRatingViewInIntefaceBuilder.png in Resources */,
+				68336DB329891EE600EE8840 /* StarRatingStackView.xib in Resources */,
 				68CF86182984309300E67C43 /* ice cream.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,7 +235,10 @@
 				68F10D6A2976A04300767125 /* AddModelToARKit.xcdatamodeld in Sources */,
 				68F10D642976A04300767125 /* ViewController.swift in Sources */,
 				68F10D802976AB3400767125 /* VirtualObjectLoader.swift in Sources */,
+				68336DB7298946ED00EE8840 /* RatingModel.swift in Sources */,
 				68F10D862976C43A00767125 /* ThresholdPanGesture.swift in Sources */,
+				68336DB029891EE600EE8840 /* StarRatingStackView.swift in Sources */,
+				68336DB129891EE600EE8840 /* StarRatingView.swift in Sources */,
 				68F10D822976AD2D00767125 /* VirtualObjectSelection.swift in Sources */,
 				68F10D7E2976A3F300767125 /* VirtualObject.swift in Sources */,
 				68F10D7B2976A26100767125 /* VirtualObjectARView.swift in Sources */,
