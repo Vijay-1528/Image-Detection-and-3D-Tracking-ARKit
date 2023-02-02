@@ -14,8 +14,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "virtualObjectSelectionViewController(didSelectObject:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "virtualObjectSelectionViewController(didSelectObject:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
             landmarkName = "placeVirtualObject(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -56,32 +56,32 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "03D7C798-74C3-4162-89C7-C7387F06FB83"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "687"
-            endingLineNumber = "687"
-            landmarkName = "ViewController"
-            landmarkType = "21">
+            startingLineNumber = "709"
+            endingLineNumber = "709"
+            landmarkName = "renderer(_:didAdd:for:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "7E9A5984-F3EE-42E5-A85D-B15B6AF67E60"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "683"
-            endingLineNumber = "683"
-            landmarkName = "ViewController"
-            landmarkType = "21">
+            startingLineNumber = "705"
+            endingLineNumber = "705"
+            landmarkName = "renderer(_:didAdd:for:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -94,8 +94,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
             landmarkName = "ViewController"
             landmarkType = "21">
             <Locations>
@@ -142,8 +142,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
+            startingLineNumber = "605"
+            endingLineNumber = "605"
             landmarkName = "ViewController"
             landmarkType = "21">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "updateCurrentScreen()"
             landmarkType = "7">
             <Locations>
@@ -222,8 +222,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "614"
-            endingLineNumber = "614"
+            startingLineNumber = "636"
+            endingLineNumber = "636"
             landmarkName = "ViewController"
             landmarkType = "21">
          </BreakpointContent>
@@ -238,8 +238,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "573"
-            endingLineNumber = "573"
+            startingLineNumber = "595"
+            endingLineNumber = "595"
             landmarkName = "ViewController"
             landmarkType = "21">
          </BreakpointContent>
@@ -286,8 +286,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "586"
-            endingLineNumber = "586"
+            startingLineNumber = "608"
+            endingLineNumber = "608"
             landmarkName = "ViewController"
             landmarkType = "21">
          </BreakpointContent>
@@ -302,8 +302,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639"
+            startingLineNumber = "661"
+            endingLineNumber = "661"
             landmarkName = "ViewController"
             landmarkType = "21">
          </BreakpointContent>
@@ -318,8 +318,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "645"
-            endingLineNumber = "645"
+            startingLineNumber = "667"
+            endingLineNumber = "667"
             landmarkName = "ViewController"
             landmarkType = "21">
          </BreakpointContent>
@@ -334,8 +334,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "769"
-            endingLineNumber = "769"
+            startingLineNumber = "791"
+            endingLineNumber = "791"
             landmarkName = "didPan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -350,8 +350,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "tappedAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -366,8 +366,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "777"
-            endingLineNumber = "777"
+            startingLineNumber = "799"
+            endingLineNumber = "799"
             landmarkName = "didPan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -382,8 +382,8 @@
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "787"
-            endingLineNumber = "787"
+            startingLineNumber = "809"
+            endingLineNumber = "809"
             landmarkName = "didPan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -392,14 +392,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "6F0A33D3-FB99-4D84-AD5D-A91135B28B44"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "404"
-            endingLineNumber = "404"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "renderer(_:didUpdate:for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -408,14 +408,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "DCFAF205-9791-4AA6-9301-F81FEF624E5C"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "customViewOfRating(nodeName:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -424,63 +424,111 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "DBD503F8-7349-4775-B3A4-4D43C2DDB578"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AddModelToARKit/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "customViewOfRating(nodeName:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DBD503F8-7349-4775-B3A4-4D43C2DDB578 - f685e6647a8a3aa0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AddModelToARKit.ViewController.customViewOfRating(nodeName: Swift.String) -&gt; __C.UIView"
+                  moduleName = "AddModelToARKit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac-obs-41/Documents/Practice/AddModelToARKit/AddModelToARKit/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "860">
+               </Location>
+               <Location
+                  uuid = "DBD503F8-7349-4775-B3A4-4D43C2DDB578 - f685e6647a8a3aa0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AddModelToARKit.ViewController.customViewOfRating(nodeName: Swift.String) -&gt; __C.UIView"
+                  moduleName = "AddModelToARKit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac-obs-41/Documents/Practice/AddModelToARKit/AddModelToARKit/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "1092">
+               </Location>
+               <Location
+                  uuid = "DBD503F8-7349-4775-B3A4-4D43C2DDB578 - f685e6647a8a3aa0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AddModelToARKit.ViewController.customViewOfRating(nodeName: Swift.String) -&gt; __C.UIView"
+                  moduleName = "AddModelToARKit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac-obs-41/Documents/Practice/AddModelToARKit/AddModelToARKit/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "1432">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "197FEA79-2C57-42FB-8A22-D0EC096BE00F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddModelToARKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "customViewOfRating(nodeName:)"
+            startingLineNumber = "867"
+            endingLineNumber = "867"
+            landmarkName = "rotateNode(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "DBD503F8-7349-4775-B3A4-4D43C2DDB578 - f685e6647a8a357e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AddModelToARKit.ViewController.customViewOfRating(nodeName: Swift.String) -&gt; __C.UIView"
-                  moduleName = "AddModelToARKit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac-obs-41/Documents/Practice/AddModelToARKit/AddModelToARKit/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "140"
-                  endingLineNumber = "140"
-                  offsetFromSymbolStart = "864">
-               </Location>
-               <Location
-                  uuid = "DBD503F8-7349-4775-B3A4-4D43C2DDB578 - f685e6647a8a357e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AddModelToARKit.ViewController.customViewOfRating(nodeName: Swift.String) -&gt; __C.UIView"
-                  moduleName = "AddModelToARKit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac-obs-41/Documents/Practice/AddModelToARKit/AddModelToARKit/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "140"
-                  endingLineNumber = "140"
-                  offsetFromSymbolStart = "1096">
-               </Location>
-               <Location
-                  uuid = "DBD503F8-7349-4775-B3A4-4D43C2DDB578 - f685e6647a8a357e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AddModelToARKit.ViewController.customViewOfRating(nodeName: Swift.String) -&gt; __C.UIView"
-                  moduleName = "AddModelToARKit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac-obs-41/Documents/Practice/AddModelToARKit/AddModelToARKit/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "140"
-                  endingLineNumber = "140"
-                  offsetFromSymbolStart = "1444">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "99209778-D7F4-47ED-9052-B5B58F9D9820"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AddModelToARKit/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "843"
+            endingLineNumber = "843"
+            landmarkName = "scaleObject(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "84ADB046-EA3E-4868-BC56-C89B1579AEF9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AddModelToARKit/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "845"
+            endingLineNumber = "845"
+            landmarkName = "scaleObject(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

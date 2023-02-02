@@ -55,6 +55,9 @@ class ViewController: UIViewController {
     
     var count = Int()
     
+    //Store The Rotation Of The CurrentNode
+    var currentAngleY: Float = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -75,6 +78,15 @@ class ViewController: UIViewController {
         tapGesture.numberOfTapsRequired = 1
         tapGesture.delegate = self
         self.sceneView.addGestureRecognizer(tapGesture)
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(scaleObject(_:)))
+        pinchGesture.delegate = self
+        self.sceneView.addGestureRecognizer(pinchGesture)
+        
+        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotateNode(_ :)))
+        rotateGesture.delegate = self
+        self.sceneView.addGestureRecognizer(rotateGesture)
+        
         self.starImgView = self.customViewOfRating(nodeName: "").image
         
         //        statusViewController.scheduleMessage("FIND A SURFACE TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .planeEstimation)
@@ -339,20 +351,27 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
 //        // Get the CGImage on which to perform requests.
 //        guard let cgImage = convertedImg?.cgImage else { return }
 //
+//        let imageview = UIImageView()
+//        if let image = convertedImg {
+//            imageview.image = image
+//        }
+//        imageview.backgroundColor = .orange
+//
 //        // Create a new image-request handler.
 //        let requestHandler = VNImageRequestHandler(cgImage: cgImage)
 //
 //        // Create a new request to recognize text.
 //        self.textRecognitionRequest = VNRecognizeTextRequest(completionHandler: { (request, error) in
-//            if error == nil {
-//                debugPrint(request)
-//            } else {
-//                debugPrint(error as Any)
-//            }
+//            guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {return}
+//                 let text = observations.compactMap({
+//                 $0.topCandidates(1).first?.string
+//                 }).joined(separator: ", ")
+//                 print(text) // text we get from image
 //        })
 //
 //        do {
 //            // Perform the text-recognition request.
+//            self.textRecognitionRequest.recognitionLevel = .accurate
 //            try requestHandler.perform([self.textRecognitionRequest])
 //        } catch {
 //            print("Unable to perform the requests: \(error).")
@@ -437,6 +456,9 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
                 cupScene = SCNScene(named: "Models.scnassets/candle/candle.scn")!
             } else if imageAnchor.name ?? "" == "naanChanna" {
                 cupScene = SCNScene(named: "Models.scnassets/sticky note/sticky note.scn")!
+            } else {
+                guard let screen = SCNScene(named: "ice cream.obj") else { return node }
+                cupScene = screen
             }
             let cupNode = cupScene.rootNode.childNodes.first!
             cupNode.position = SCNVector3Zero
@@ -679,31 +701,31 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     //        return parentNode
     //    }
     
-    //    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-    //        guard let imgAnchor = anchor as? ARImageAnchor else {return}
-    //        let referImg = imgAnchor.referenceImage
-    //        debugPrint("referImg details width: \(referImg.physicalSize.width), height: \(referImg.physicalSize.height) and name: \(referImg.name ?? "")")
-    //        DispatchQueue.main.asyncAfter(deadline: .now()+1.0) {
-    //            let cellIsEnabled = self.enabledVirtualObjectRows.contains(2)
-    //            guard cellIsEnabled else { return }
-    //            self.updateCurrentScreen()
-    //            let object = self.virtualObjects[2]
-    //            self.virtualObjectSelectionViewController(didSelectObject: object)
-    ////            let modelNode = self.sceneView.scene.rootNode.childNodes
-    ////            DispatchQueue.main.asyncAfter(deadline: .now()+3.0) {
-    ////                guard let objectIndex = self.virtualObjectLoader.loadedObjects.firstIndex(of: object) else {
-    ////                    fatalError("Programmer error: Failed to lookup virtual object in scene.")
-    ////                }
-    ////                self.virtualObjectLoader.removeVirtualObject(at: objectIndex)
-    ////                self.virtualObjectInteraction.selectedObject = nil
-    ////                if let anchor = object.anchor {
-    ////                    self.session.remove(anchor: anchor)
-    ////                }
-    ////            }
-    //            debugPrint("self.sceneView.session.currentFrame?.geoTrackingStatus \(self.sceneView.session.currentFrame?.geoTrackingStatus)")
-    ////            self.sceneView.session.run(<#T##configuration: ARConfiguration##ARConfiguration#>)
-    //        }
-    //    }
+        func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+            guard let imgAnchor = anchor as? ARImageAnchor else {return}
+            let referImg = imgAnchor.referenceImage
+            debugPrint("referImg details width: \(referImg.physicalSize.width), height: \(referImg.physicalSize.height) and name: \(referImg.name ?? "")")
+            DispatchQueue.main.asyncAfter(deadline: .now()+1.0) {
+                let cellIsEnabled = self.enabledVirtualObjectRows.contains(2)
+                guard cellIsEnabled else { return }
+                self.updateCurrentScreen()
+                let object = self.virtualObjects[2]
+                self.virtualObjectSelectionViewController(didSelectObject: object)
+    //            let modelNode = self.sceneView.scene.rootNode.childNodes
+    //            DispatchQueue.main.asyncAfter(deadline: .now()+3.0) {
+    //                guard let objectIndex = self.virtualObjectLoader.loadedObjects.firstIndex(of: object) else {
+    //                    fatalError("Programmer error: Failed to lookup virtual object in scene.")
+    //                }
+    //                self.virtualObjectLoader.removeVirtualObject(at: objectIndex)
+    //                self.virtualObjectInteraction.selectedObject = nil
+    //                if let anchor = object.anchor {
+    //                    self.session.remove(anchor: anchor)
+    //                }
+    //            }
+                debugPrint("self.sceneView.session.currentFrame?.geoTrackingStatus \(self.sceneView.session.currentFrame?.geoTrackingStatus)")
+    //            self.sceneView.session.run(<#T##configuration: ARConfiguration##ARConfiguration#>)
+            }
+        }
     // MARK: - Focus Square
     //    func updateFocusSquare(isObjectVisible: Bool) {
     //        if isObjectVisible || coachingOverlay.isActive {
@@ -809,6 +831,60 @@ extension ViewController: UIGestureRecognizerDelegate {
             // Reset the current position tracking.
             debugPrint("default is working")
             break
+        }
+    }
+    
+    @objc func scaleObject(_ gesture: UIPinchGestureRecognizer) {
+        guard let tapSceneView = gesture.view as? SCNView else {return}
+        let touchLocation = gesture.location(in: tapSceneView)
+        let hitResult = tapSceneView.hitTest(touchLocation)
+        if !(hitResult.isEmpty) {
+            for nodes in hitResult {
+                if nodes.node.childNodes.count > 0, nodes.node.name ?? "" == "fine_IdlySambar" {
+//                    guard let nodeToScale = nodes.node else { return }
+                    let nodeToScale = nodes.node
+                    if gesture.state == .changed {
+
+                        let pinchScaleX: CGFloat = gesture.scale * CGFloat((nodeToScale.scale.x))
+                        let pinchScaleY: CGFloat = gesture.scale * CGFloat((nodeToScale.scale.y))
+                        let pinchScaleZ: CGFloat = gesture.scale * CGFloat((nodeToScale.scale.z))
+                        nodeToScale.scale = SCNVector3Make(Float(pinchScaleX), Float(pinchScaleY), Float(pinchScaleZ))
+                        gesture.scale = 1
+
+                    }
+                    if gesture.state == .ended { }
+                }
+            }
+        }
+    }
+    
+    /// Rotates An SCNNode Around It's YAxis
+    ///
+    /// - Parameter gesture: UIRotationGestureRecognizer
+    @objc func rotateNode(_ gesture: UIRotationGestureRecognizer){
+
+        //1. Get The Current Rotation From The Gesture
+        let rotation = Float(gesture.rotation)
+        guard let tapSceneView = gesture.view as? SCNView else {return}
+        let touchLocation = gesture.location(in: tapSceneView)
+        let hitResult = tapSceneView.hitTest(touchLocation)
+        if !(hitResult.isEmpty) {
+            for nodes in hitResult {
+                if nodes.node.childNodes.count > 0, nodes.node.childNodes[0].name ?? "" == "not" {
+                    let currentNode = nodes.node.childNodes[0]
+                    //2. If The Gesture State Has Changed Set The Nodes EulerAngles.y
+                    if gesture.state == .changed{
+
+                        currentNode.eulerAngles.y = currentAngleY + rotation
+                    }
+
+                    //3. If The Gesture Has Ended Store The Last Angle Of The Cube
+                    if(gesture.state == .ended) {
+                        currentAngleY = currentNode.eulerAngles.y
+
+                    }
+                }
+            }
         }
     }
 }
