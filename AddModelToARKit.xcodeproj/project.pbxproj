@@ -17,6 +17,7 @@
 		6870BD55297AAC57009482B4 /* FRENCH_FRIES.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6870BD54297AAC57009482B4 /* FRENCH_FRIES.obj */; };
 		68CF86172984309300E67C43 /* Cupcake.obj in Resources */ = {isa = PBXBuildFile; fileRef = 68CF86152984309300E67C43 /* Cupcake.obj */; };
 		68CF86182984309300E67C43 /* ice cream.obj in Resources */ = {isa = PBXBuildFile; fileRef = 68CF86162984309300E67C43 /* ice cream.obj */; };
+		68EA3FCD298D28C800303618 /* Star.obj in Resources */ = {isa = PBXBuildFile; fileRef = 68EA3FCC298D28C800303618 /* Star.obj */; };
 		68F10D602976A04300767125 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F10D5F2976A04300767125 /* AppDelegate.swift */; };
 		68F10D622976A04300767125 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F10D612976A04300767125 /* SceneDelegate.swift */; };
 		68F10D642976A04300767125 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F10D632976A04300767125 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 		6870BD54297AAC57009482B4 /* FRENCH_FRIES.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FRENCH_FRIES.obj; sourceTree = "<group>"; };
 		68CF86152984309300E67C43 /* Cupcake.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cupcake.obj; sourceTree = "<group>"; };
 		68CF86162984309300E67C43 /* ice cream.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ice cream.obj"; sourceTree = "<group>"; };
+		68EA3FCC298D28C800303618 /* Star.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Star.obj; sourceTree = "<group>"; };
 		68F10D5C2976A04300767125 /* AddModelToARKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddModelToARKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F10D5F2976A04300767125 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68F10D612976A04300767125 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		68F10D762976A1AD00767125 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				68EA3FCC298D28C800303618 /* Star.obj */,
 				68CF86152984309300E67C43 /* Cupcake.obj */,
 				68CF86162984309300E67C43 /* ice cream.obj */,
 				6870BD54297AAC57009482B4 /* FRENCH_FRIES.obj */,
@@ -218,6 +221,7 @@
 				68F10D6C2976A04400767125 /* Assets.xcassets in Resources */,
 				6870BD55297AAC57009482B4 /* FRENCH_FRIES.obj in Resources */,
 				68CF86172984309300E67C43 /* Cupcake.obj in Resources */,
+				68EA3FCD298D28C800303618 /* Star.obj in Resources */,
 				68F10D672976A04300767125 /* Main.storyboard in Resources */,
 				68336DB229891EE600EE8840 /* starRatingViewInIntefaceBuilder.png in Resources */,
 				68336DB329891EE600EE8840 /* StarRatingStackView.xib in Resources */,

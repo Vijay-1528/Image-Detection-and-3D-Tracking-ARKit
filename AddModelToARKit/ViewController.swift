@@ -83,9 +83,9 @@ class ViewController: UIViewController {
         pinchGesture.delegate = self
         self.sceneView.addGestureRecognizer(pinchGesture)
         
-        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotateNode(_ :)))
-        rotateGesture.delegate = self
-        self.sceneView.addGestureRecognizer(rotateGesture)
+//        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotateNode(_ :)))
+//        rotateGesture.delegate = self
+//        self.sceneView.addGestureRecognizer(rotateGesture)
         
         self.starImgView = self.customViewOfRating(nodeName: "").image
         
@@ -448,21 +448,30 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
             let planeNode = SCNNode(geometry: plane)
             planeNode.eulerAngles.x = -.pi / 2
             planeNode.name = "fine_\(imageAnchor.name ?? "")"
-            
+            debugPrint("planeNode names fine_\(imageAnchor.name ?? "")")
             node.position.x += 0.08
             
             var cupScene = SCNScene(named: "Models.scnassets/cup/cup.scn")!
             if imageAnchor.name ?? "" == "Chappathi" {
+                parentNode.name = "Chappathi"
                 cupScene = SCNScene(named: "Models.scnassets/candle/candle.scn")!
             } else if imageAnchor.name ?? "" == "naanChanna" {
                 cupScene = SCNScene(named: "Models.scnassets/sticky note/sticky note.scn")!
+                parentNode.name = "naanChanna"
             } else {
-                guard let screen = SCNScene(named: "ice cream.obj") else { return node }
-                cupScene = screen
+//                guard let screen = SCNScene(named: "ice cream.obj") else { return node }
+//                guard let screen = SCNScene(named: "Cupcake.obj") else { return node }
+//                guard let screen = SCNScene(named: "Star.obj") else { return node }
+//                cupScene = screen
+                parentNode.name = "IdlySambar"
             }
             let cupNode = cupScene.rootNode.childNodes.first!
             cupNode.position = SCNVector3Zero
             cupNode.position.z = 0.15
+            
+            let action = SCNAction.rotate(by: 360 * CGFloat(Double.pi / 180), around: SCNVector3(x: 0, y: 1, z: 0), duration: 8.0)
+            let repeatAction = SCNAction.repeatForever(action)
+            cupNode.runAction(repeatAction)
             
             cupNode.name = "not"
             debugPrint("node name == \(imageAnchor.name ?? "")")
@@ -793,7 +802,7 @@ extension ViewController: UIGestureRecognizerDelegate {
             let hitResult = tapSceneView.hitTest(touchLocation)
             if !(hitResult.isEmpty) {
                 for nodes in hitResult {
-                    if nodes.node.name == "cup" {
+                    if nodes.node.name == "cup" || nodes.node.name == "fine_IdlySambar"{
                         self.nodeName = nodes.node.name ?? ""
                         let node = hitResult[0].node
                         debugPrint("They have touch the 3D model node")
@@ -840,9 +849,39 @@ extension ViewController: UIGestureRecognizerDelegate {
         let hitResult = tapSceneView.hitTest(touchLocation)
         if !(hitResult.isEmpty) {
             for nodes in hitResult {
-                if nodes.node.childNodes.count > 0, nodes.node.name ?? "" == "fine_IdlySambar" {
+//                if nodes.node.childNodes.count > 0, nodes.node.name ?? "" == "fine_IdlySambar" {
+                var nodeToScale = nodes.node
+                if nodes.node.name ?? "" == "cup" || nodes.node.name ?? "" == "plate" {
 //                    guard let nodeToScale = nodes.node else { return }
-                    let nodeToScale = nodes.node
+                    let separateNode = self.sceneView.scene.rootNode.childNodes.filter { firstNode in
+                        return firstNode.name == "IdlySambar" && firstNode.childNodes.count > 0
+                    }
+                    let accurateNode = separateNode.filter { newNode in
+                        guard newNode.childNodes.count > 0, newNode.childNodes[0].childNodes.count > 0 else {return false}
+                        let secondNode = newNode.childNodes[0].childNodes
+                        let separate = secondNode.filter { secondNode in
+                            return secondNode.name == "fine_IdlySambar"
+                        }
+                        nodeToScale = separate[0]
+                        return separate.count > 0
+                    }
+//                    if accurateNode.count > 0 {
+//                        debugPrint("accurateNode \(accurateNode[0].childNodes)")
+//                        nodeToScale = accurateNode[0].childNodes.filter({ newnode in
+//                            return newnode.name == "fine_IdlySambar"
+//                        })
+//                    }
+//                    for item in self.sceneView.scene.rootNode.childNodes {
+//                        if item.name == "IdlySambar", item.childNodes.count > 0 {
+//                            for detailNode in item.childNodes {
+//                                for firstNode in detailNode.childNodes {
+//                                    if firstNode.name == "fine_IdlySambar" {
+//                                        nodeToScale = firstNode
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
                     if gesture.state == .changed {
 
                         let pinchScaleX: CGFloat = gesture.scale * CGFloat((nodeToScale.scale.x))
@@ -861,32 +900,32 @@ extension ViewController: UIGestureRecognizerDelegate {
     /// Rotates An SCNNode Around It's YAxis
     ///
     /// - Parameter gesture: UIRotationGestureRecognizer
-    @objc func rotateNode(_ gesture: UIRotationGestureRecognizer){
-
-        //1. Get The Current Rotation From The Gesture
-        let rotation = Float(gesture.rotation)
-        guard let tapSceneView = gesture.view as? SCNView else {return}
-        let touchLocation = gesture.location(in: tapSceneView)
-        let hitResult = tapSceneView.hitTest(touchLocation)
-        if !(hitResult.isEmpty) {
-            for nodes in hitResult {
-                if nodes.node.childNodes.count > 0, nodes.node.childNodes[0].name ?? "" == "not" {
-                    let currentNode = nodes.node.childNodes[0]
-                    //2. If The Gesture State Has Changed Set The Nodes EulerAngles.y
-                    if gesture.state == .changed{
-
-                        currentNode.eulerAngles.y = currentAngleY + rotation
-                    }
-
-                    //3. If The Gesture Has Ended Store The Last Angle Of The Cube
-                    if(gesture.state == .ended) {
-                        currentAngleY = currentNode.eulerAngles.y
-
-                    }
-                }
-            }
-        }
-    }
+//    @objc func rotateNode(_ gesture: UIRotationGestureRecognizer){
+//
+//        //1. Get The Current Rotation From The Gesture
+//        let rotation = Float(gesture.rotation)
+//        guard let tapSceneView = gesture.view as? SCNView else {return}
+//        let touchLocation = gesture.location(in: tapSceneView)
+//        let hitResult = tapSceneView.hitTest(touchLocation)
+//        if !(hitResult.isEmpty) {
+//            for nodes in hitResult {
+//                if nodes.node.childNodes.count > 0, nodes.node.childNodes[0].name ?? "" == "not" {
+//                    let currentNode = nodes.node.childNodes[0]
+//                    //2. If The Gesture State Has Changed Set The Nodes EulerAngles.y
+//                    if gesture.state == .changed {
+//
+//                        currentNode.eulerAngles.y = currentAngleY + rotation
+//                    }
+//
+//                    //3. If The Gesture Has Ended Store The Last Angle Of The Cube
+//                    if(gesture.state == .ended) {
+//                        currentAngleY = currentNode.eulerAngles.y
+//
+//                    }
+//                }
+//            }
+//        }
+//    }
 }
 
 
